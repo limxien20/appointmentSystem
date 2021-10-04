@@ -7,7 +7,7 @@
 }
 
 .open-button {
-    background-color: #9cafee;
+    background-color: #163aaf;
     color: white;
     padding: 16px 20px;
     border: none;
@@ -48,7 +48,7 @@
     overflow: hidden;
 }
 
-#header
+#chatheader
 {
     height: 80px;
     width: 100%;

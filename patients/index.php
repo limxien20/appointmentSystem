@@ -12,7 +12,7 @@
   <!-- Chatbot bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="chatbotcss/chatbot.css">
   <!-- end -->
 
   <!-- Favicons -->
@@ -94,7 +94,7 @@
   <div id="chat_container">
       <button class="open-button" onclick="openChat()"><b>...</button>
       <div class="chat-popup" id="screen">
-          <div id="header">Chatbot</div>
+          <div id="chatheader">Chatbot</div>
           <div id="messageDisplay">
               <div class = "messageContainer">
                   <div class="chat botMessage"> Ask me questions and I will try to answer it..</div>
