@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Medilab Bootstrap Template</title>
+  <title>Make An Appointment Now</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -59,35 +59,13 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Medilab</a></h1>
+      <h1 class="logo me-auto"><a href="index.html">EchoHealth</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto " href="index.php">Home</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -99,28 +77,71 @@
 
   <main id="main">
 
-    <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
+    <section class="inner-page">
+      <!-- ======= Appointment Section ======= -->
+    <section id="appointment" class="appointment section-bg">
       <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
-          </ol>
+        <div class="section-title">
+          <h2>Make an Appointment</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
 
-      </div>
-    </section><!-- End Breadcrumbs Section -->
+        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <div class="validate"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 form-group mt-3">
+              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="department" id="department" class="form-select">
+                <option value="">Select Department</option>
+                <option value="Department 1">Department 1</option>
+                <option value="Department 2">Department 2</option>
+                <option value="Department 3">Department 3</option>
+              </select>
+              <div class="validate"></div>
+            </div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="doctor" id="doctor" class="form-select">
+                <option value="">Select Doctor</option>
+                <option value="Doctor 1">Doctor 1</option>
+                <option value="Doctor 2">Doctor 2</option>
+                <option value="Doctor 3">Doctor 3</option>
+              </select>
+              <div class="validate"></div>
+            </div>
+          </div>
 
-    <section class="inner-page">
-      <div class="container">
-        <p>
-          Example inner page template
-        </p>
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
+            <div class="validate"></div>
+          </div>
+          <div class="mb-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+          </div>
+          <div class="text-center"><button type="submit">Make an Appointment</button></div>
+        </form>
+
       </div>
+    </section><!-- End Appointment Section -->
     </section>
+    
 
   </main><!-- End #main -->
 
@@ -132,7 +153,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3>Medilab</h3>
+            <h3>EchoHealth</h3>
             <p>
               A108 Adam Street <br>
               New York, NY 535022<br>
