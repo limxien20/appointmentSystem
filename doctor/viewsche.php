@@ -102,7 +102,7 @@ include_once("session.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Doctors List</h5>
+                                    <h5 class="card-header">Schedule List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
