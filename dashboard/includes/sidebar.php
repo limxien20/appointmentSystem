@@ -41,6 +41,9 @@
                                 <div id="submenu-4" class="collapse submenu" >
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
+                                            <a class="nav-link" href="viewDocSched.php">View Doctor Schedule</a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a class="nav-link" href="viewdoc.php">View All Doctors</a>
                                         </li>
                                         <li class="nav-item">
