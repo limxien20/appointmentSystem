@@ -1,3 +1,7 @@
+<?php
+include_once("session.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +45,7 @@
         <i class="bi bi-phone"></i> +1 5589 55488 55
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
-        <a href="#" >(user), Logout</a>
+      <?php echo $_SESSION['patient'];?><a href="logout.php" >, Logout</a>
         
       </div>
     </div>

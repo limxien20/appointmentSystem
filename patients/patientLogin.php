@@ -1,3 +1,31 @@
+<?php
+session_start();
+function login(){
+    if(isset($_POST['login'])){
+        //getting the form data
+        $icno = $_POST['icno'];
+        $pw = $_POST['pw'];
+
+        $query= "SELECT * FROM patients WHERE BINARY icno='$icno' && patient_pw='$pw'";
+
+        require_once('dbconn.php');
+
+        $result = mysqli_query($db,$query) or die("Problem Encounter: Please check your ID or password");
+        $count = mysqli_num_rows($result);
+        if($count == 1){           
+            $_SESSION['patient'] = $icno;           
+            header('Location: main.php');
+        }
+        else{
+            echo "<script>alert('Problem Encounter: Please check your ID or password')</script>";
+        }
+        
+    }
+}
+
+?>
+<?php login() ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,21 +106,20 @@
             <p>To make an appointment with a doctor, please Login/ Sign Up to proceed for further action </p>
             </div>
 
-            <form action="" method="post" role="form" class="php-email-form">
+            <form action="" method="post">
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                <input type="text" name="userid" class="form-control" id="userid" placeholder="User ID" >
-                <div class="validate"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 offset-md-4 form-group">
-                <input type="email" class="form-control" name="Password" id="pw" placeholder="Password" data-rule="password" data-msg="Please enter a valid password">
-                <div class="validate"></div>
+                <input type="text" name="icno" class="form-control" id="icno" placeholder="ICNO/Passport No." required>
                 </div>
             </div>
             <br>
-            <div class="text-center"><button type="submit">Login</button></div>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                <input type="password" class="form-control" name="pw" id="pw" placeholder="Password" required>
+                </div>
+            </div>
+            <br>
+            <div class="text-center"><button type="submit" name="login" class="btn btn-space btn-primary" style="border-radius: 20px;">Login</button></div>
             </form>
             <br>
             <div class="text-center"><a href="patientSignUp.php"> No Account? Click here to Sign Up </a></div>
