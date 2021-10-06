@@ -103,17 +103,52 @@ include_once("session.php");
 									</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
+                                        <?php
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $query = "SELECT * FROM patients";
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
                                             <table class="table">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                        <th class="border-0 text-right">No.</th>
-                                                        <th class="border-0">Name</th>
+                                                        <th class="border-0">ICNO./Passport No.</th>
+                                                        <th class="border-0">First Name</th>
+                                                        <th class="border-0">Last Name</th>
                                                         <th class="border-0">Email</th>
                                                         <th class="border-0">Phone</th>
-                                                        <th class="border-0">Credit</th>
+                                                        <th class="border-0">D.O.B</th>
+                                                        <th class="border-0">Gender</th>
+                                                        <th class="border-0">Nationality</th>
+
                                                     </tr>
                                                 </thead>
-                                                <tbody id="customerlist">
+                                                <tbody id="patientlist">
+                                                <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result) ){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['icno']; ?></td>
+                                                                    <td><?php echo $row['patient_fname']; ?></td>
+                                                                    <td><?php echo $row['patient_lname']; ?></td>
+                                                                    <td><?php echo $row['patient_email']; ?></td>
+                                                                    <td><?php echo $row['patient_phone']; ?></td>
+                                                                    <td><?php echo $row['patient_dob']; ?></td>
+                                                                    <td><?php echo $row['patient_gender']; ?></td>
+                                                                    <td><?php echo $row['nationality']; ?></td>
+                                                                </tr>    
+                                                    <?php
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                              
+
 												
                                                 </tbody>
                                             </table>

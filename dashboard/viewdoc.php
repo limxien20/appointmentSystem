@@ -101,7 +101,7 @@ include_once("session.php");
 
 if(isset($_POST['search'])){
     $search = $_POST['searchval'];
-    $query= "SELECT * FROM `doctors` WHERE CONCAT (`docLname`, `docID`, `docEmail`, `docPhone`, `docDepartment`) LIKE '%".$search."%'";
+    $query= "SELECT * FROM `doctors` WHERE CONCAT (`docID`,`docFname`, `docID`, `docEmail`, `docPhone`, `docDepartment`) LIKE '%".$search."%'";
     $search_result = searchTable($query);
 
 }
