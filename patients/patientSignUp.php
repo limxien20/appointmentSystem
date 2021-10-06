@@ -1,7 +1,9 @@
+<?php include("patientFunc.php") ?>
 <?php
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $resultSet = $conn->query("SELECT genderId, gender FROM gender");
     $countryList = $conn->query("SELECT code, country FROM country");
+    addPatient();
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +56,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">EchoHealth</a></h1>
+      <h1 class="logo me-auto"><a href="index.php">EchoHealth</a></h1>
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto " href="index.php">Home</a></li>
@@ -79,43 +81,50 @@
             <p>To make an appointment with a doctor, please Login/ Sign Up to proceed for further action </p>
             </div>
 
-            <form action="" method="post" role="form" class="php-email-form">
+            <form action="" method="POST" class="form">
               
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <input type="text" name="icno" class="form-control" id="icno" placeholder="ICNO.">
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="pasword" class="form-control" name="Password" id="pw" placeholder="Password" data-rule="password" data-msg="Please enter a valid password">
+                  <input type="password" class="form-control" name="pw" id="pw" placeholder="Password">
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name">
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name">
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                 <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone No." required>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B">
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <select class="form-control" name="gender" id="gender" placeholder="Gender">
@@ -130,6 +139,7 @@
                   </select>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <select class="form-control" name="country" id="country" placeholder="Country">
@@ -138,19 +148,22 @@
                         while($row = $countryList->fetch_assoc()){
                           $code = $row['code'];
                           $country = $row['country'];
-                          echo "<option value='$code'> $code  -->  $country </option>";
+                          echo "<option value='$code'> $country </option>";
                         }
                       ?>
                   </select>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                 <textarea id="address" name="address" rows="4" cols="43" placeholder="Address"></textarea>
                 </div>
             </div>
             <br>
-            <div class="text-center"><button type="submit">Sign Up</button></div>
+            <div class="text-center">
+              <button type="submit" name="register" class="btn btn-space btn-primary">Register</button>
+            </div>
             </form>
             <br>
             <div class="text-center"><a href="patientLogin.php"> Account Existed? Click here to Login </a></div>

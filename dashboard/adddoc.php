@@ -7,6 +7,7 @@ include_once("session.php");
 <?php
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $resultSet = $conn->query("SELECT departmentName FROM department");
+    $genderSet = $conn->query("SELECT genderId, gender FROM gender");
     addDoctors();
 ?>
 
@@ -142,11 +143,16 @@ include_once("session.php");
                                         <div class="form-group row">
                                             <label for="inputGender" class="col-3 col-lg-2 col-form-label text-right">Gender: </label>
                                             <div class="col-9 col-lg-10">
-                                                <select name= "gender" class="form-control">
-                                                    <option value="">Gender</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                </select>
+                                            <select name= "gender" class="form-control">
+                                            <option value="" disabled="" selected="">Gender</option>
+                                                <?php
+                                                    while($row = $genderSet->fetch_assoc()){
+                                                    $genderid = $row['genderId'];
+                                                    $gender = $row['gender'];
+                                                    echo "<option value='$genderid'> $gender </option>";
+                                                    }
+                                                ?>
+                                            </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
