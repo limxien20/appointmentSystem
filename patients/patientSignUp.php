@@ -85,31 +85,31 @@
               
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" name="icno" class="form-control" id="icno" placeholder="ICNO.">
+                  <input type="text" name="icno" class="form-control" id="icno" placeholder="ICNO." required>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="password" class="form-control" name="pw" id="pw" placeholder="Password">
+                  <input type="password" class="form-control" name="pw" id="pw" placeholder="Password" required>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name">
+                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name">
+                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" required>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                 </div>
             </div>
             <br>
@@ -121,7 +121,7 @@
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B">
+                  <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B" required>
                 </div>
             </div>
             <br>
@@ -133,7 +133,7 @@
                         while($row = $resultSet->fetch_assoc()){
                           $genderid = $row['genderId'];
                           $gender = $row['gender'];
-                          echo "<option value='$genderid'> $gender </option>";
+                          echo "<option value='$genderid' required> $gender </option>";
                         }
                       ?>
                   </select>
@@ -148,7 +148,7 @@
                         while($row = $countryList->fetch_assoc()){
                           $code = $row['code'];
                           $country = $row['country'];
-                          echo "<option value='$code'> $country </option>";
+                          echo "<option value='$code' required> $country </option>";
                         }
                       ?>
                   </select>
@@ -157,12 +157,12 @@
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                <textarea id="address" name="address" rows="4" cols="43" placeholder="Address"></textarea>
+                <textarea class="form-control" id="address" name="address" rows="4" cols="47" placeholder="Address" required></textarea>
                 </div>
             </div>
             <br>
             <div class="text-center">
-              <button type="submit" name="register" class="btn btn-space btn-primary">Register</button>
+              <button type="submit" name="register" class="btn btn-space btn-primary" style="border-radius: 20px;">Register</button>
             </div>
             </form>
             <br>

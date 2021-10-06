@@ -149,7 +149,7 @@ include_once("session.php");
                                                     while($row = $genderSet->fetch_assoc()){
                                                     $genderid = $row['genderId'];
                                                     $gender = $row['gender'];
-                                                    echo "<option value='$genderid'> $gender </option>";
+                                                    echo "<option value='$genderid' > $gender </option>";
                                                     }
                                                 ?>
                                             </select>
@@ -158,7 +158,7 @@ include_once("session.php");
                                         <div class="form-group row">
                                             <label for="inputEmail" class="col-3 col-lg-2 col-form-label text-right">Email: </label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="address" type="email" name="email" required placeholder="Email" class="form-control">
+                                                <input id="address" type="email" name="email" required placeholder="Email" class="form-control" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
