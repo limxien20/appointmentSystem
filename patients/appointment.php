@@ -2,6 +2,14 @@
 <?php
 include_once("session.php");
 ?>
+<?php
+    $conn = new mysqli ('localhost', 'root','','health_appointment');
+    $currentUser = $_SESSION['patient'];
+    $query = "SELECT * FROM patients WHERE icno ='$currentUser'";
+    $result = mysqli_query($conn,$query);
+
+    
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +54,18 @@ include_once("session.php");
         <i class="bi bi-phone"></i> +1 5589 55488 55
       </div>
       <div class="d-none d-lg-flex social-links align-items-center">
-      <?php echo $_SESSION['patient'];?><a href="logout.php" >, Logout</a>
-        
+      <?php
+         if($result){
+            if(mysqli_num_rows($result) > 0){
+              while($row = mysqli_fetch_array($result)){
+      ?>
+        <?php echo $row['patient_fname'];?>
+        <?php
+                }
+              }
+             }
+           ?>
+        <a href="logout.php" >, Logout</a>
       </div>
     </div>
   </div>
