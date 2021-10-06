@@ -1,5 +1,3 @@
-<!-- php start -->
-
 <?php
 
 $conn = mysqli_connect("localhost", "root", "", "onlinebot");

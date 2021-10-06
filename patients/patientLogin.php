@@ -78,7 +78,7 @@
             <p>To make an appointment with a doctor, please Login/ Sign Up to proceed for further action </p>
             </div>
 
-            <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
+            <form action="" method="post" role="form" class="php-email-form">
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                 <input type="text" name="userid" class="form-control" id="userid" placeholder="User ID" >
