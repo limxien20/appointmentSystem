@@ -31,6 +31,25 @@ function addSched(){
     }
 }
 
+function schedDel(){
+    if(isset($_POST['move'])){
+
+        $id =$_POST['move_id'];
+        $db = mysqli_connect('localhost', 'root','','health_appointment');
+        $move_query = "DELETE FROM doc_sched WHERE sched_id='$id' ";
+        $result = mysqli_query($db, $move_query);
+    
+        if($result){
+          echo"<script>alert('Deleted')</script>";
+          
+        }
+        else{
+          echo"<script>alert('Delete Unsuccesfully')</script>";
+          
+        }
+      }
+}
+
 ?>
 
 

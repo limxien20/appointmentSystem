@@ -1,6 +1,7 @@
 <?php //include("includes\header.php")  ?>
 <?php include("scheFunc.php") ?>
 
+<?php schedDel(); ?>
 <?php
 include_once("session.php");
 ?>
@@ -137,6 +138,12 @@ include_once("session.php");
                                                                     <td><?php echo $row['doc_dept']; ?></td>
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
+                                                                    <td>
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="move_id" value="<?php echo $row['sched_id']; ?>">
+                                                                            <button type="submit" name="move"class="btn btn-danger">Delete</button>
+                                                                        </form>
+                                                                    </td>
                                                                 </tr>    
                                                     <?php
 

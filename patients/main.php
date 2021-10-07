@@ -109,10 +109,7 @@ include_once("session.php");
                                 <h2 class="pageheader-title">View All Schedule</h2>
 								<div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="index.php" class="breadcrumb-link">Home</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">View All Schedule</li>
-                                        </ol>
+                                        
                                     </nav>
                                 </div>
                             </div>
@@ -131,7 +128,7 @@ include_once("session.php");
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
-                                                $session = $_SESSION['doctor'];
+                                                
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
                                                             FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID";
@@ -162,6 +159,12 @@ include_once("session.php");
                                                                     <td><?php echo $row['doc_dept']; ?></td>
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
+                                                                    <td>
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="delete_id" value="<?php echo $row['docID']; ?>">
+                                                                            <button type="submit" name="delBtn"class="btn btn-primary">Book</button>
+                                                                        </form>
+                                                                    </td>
                                                                 </tr>    
                                                     <?php
 
