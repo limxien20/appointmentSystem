@@ -1,4 +1,5 @@
 <?php include("patientFunc.php") ?>
+
 <?php
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $resultSet = $conn->query("SELECT genderId, gender FROM gender");

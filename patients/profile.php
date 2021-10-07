@@ -1,14 +1,16 @@
 <?php
 include_once("session.php");
 ?>
+<?php include("patientFunc.php") ?>
 
 <?php
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $currentUser = $_SESSION['patient'];
-    $query = "SELECT patient_fname FROM patients WHERE icno ='$currentUser'";
+    $query = "SELECT * FROM patients WHERE icno ='$currentUser'";
     $result = mysqli_query($conn,$query);
-
-    
+    $resultSet = $conn->query("SELECT genderId, gender FROM gender");
+    $countryList = $conn->query("SELECT code, country FROM country");
+    editProfile();
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +47,19 @@ include_once("session.php");
 </head>
 
 <body>
-
+    <!-- ============================================================== -->
+    <script>
+        function showPw() {
+            var x = document.getElementById("pw");
+            if (x.type === "password") {
+                x.type = "text";
+            }
+            else {
+                x.type = "password";
+            }
+        }
+    </script>
+    <!-- ============================================================== -->
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex justify-content-between">
@@ -60,11 +74,7 @@ include_once("session.php");
               while($row = mysqli_fetch_array($result)){
       ?>
         <a href="profile.php" ><?php echo $row['patient_fname'];?></a>
-        <?php
-                }
-              }
-             }
-           ?>
+        
         <a href="logout.php" >, Logout</a>
         
       </div>
@@ -78,7 +88,7 @@ include_once("session.php");
       <h1 class="logo me-auto"><a href="index.php">EchoHealth</a></h1>
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto " href="main.php">Dcctor Schedule</a></li>
+          <li><a class="nav-link scrollto " href="main.php">Doctor Schedule</a></li>
           <li><a class="nav-link scrollto " href="appointment.php">Appointment</a></li>
           <li><a class="nav-link scrollto " href="history.php">History</a></li>
         </ul>
@@ -93,7 +103,7 @@ include_once("session.php");
   <main id="main">
 
     <section class="inner-page">
-      <!-- ======= Login form Section ======= -->
+      <!-- ======= Update form Section ======= -->
         <section id="appointment" class="appointment section-bg">
         <div class="container">
             <div class="section-title">
@@ -103,58 +113,68 @@ include_once("session.php");
             </div>
 
             <form action="" method="POST" class="form">
-              
+            
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" name="icno" class="form-control" id="icno" placeholder="ICNO." required>
+                  <input type="text" name="icno" class="form-control" id="icno" placeholder="ICNO."  value="<?php echo $row['icno'];?>" readonly>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="password" class="form-control" name="pw" id="pw" placeholder="Password" required>
+                  <input type="password" class="form-control" name="pw" id="pw" placeholder="Password" value="<?php echo $row['patient_pw'];?>" readonly>
+                  <input type="checkbox" onclick="showPw()"> Show Password
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
+                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" value="<?php echo $row['patient_fname'];?>" readonly>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" required>
+                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" value="<?php echo $row['patient_lname'];?>" readonly>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                  <input type="email" class="form-control" name="edit_email" id="email" placeholder="Email" value="<?php echo $row['patient_email'];?>" required>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone No." required>
+                <input type="tel" class="form-control" id="phone" name="edit_phone" placeholder="Phone No." value="<?php echo $row['patient_phone'];?>" required>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B" required>
+                  <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B" value="<?php echo $row['patient_dob'];?>" readonly>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <select class="form-control" name="gender" id="gender" placeholder="Gender">
-                    <option value="" disabled="" selected="">Gender</option>
+                  <select class="form-control" name="edit_gender" id="gender" placeholder="Gender">
+                    <option value="<?php echo $row['patient_gender'];?>" disabled="" selected="" readonly><?php echo $row['patient_gender'];?></option>
+                      
+                  </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <select class="form-control" name="edit_country" id="country" placeholder="Country">
+                  <option value="<?php echo $row['nationality'];?>" disabled="" selected="" required><?php echo $row['nationality'];?></option>
                       <?php
-                        while($row = $resultSet->fetch_assoc()){
-                          $genderid = $row['genderId'];
-                          $gender = $row['gender'];
-                          echo "<option value='$genderid' required> $gender </option>";
+                        while($countryrow = $countryList->fetch_array()){
+                          $code = $countryrow['code'];
+                          $country = $countryrow['country'];
+                          echo "<option value='$code' required> $code -> $country </option>";
                         }
                       ?>
                   </select>
@@ -163,34 +183,27 @@ include_once("session.php");
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <select class="form-control" name="country" id="country" placeholder="Country">
-                    <option value="" disabled="" selected="">Country</option>
-                      <?php
-                        while($row = $countryList->fetch_assoc()){
-                          $code = $row['code'];
-                          $country = $row['country'];
-                          echo "<option value='$code' required> $country </option>";
-                        }
-                      ?>
-                  </select>
+                <textarea class="form-control" id="address" name="edit_address" value="" required><?php echo $row['patient_add'];?></textarea>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-4 offset-md-4 form-group">
-                <textarea class="form-control" id="address" name="address" rows="4" cols="47" placeholder="Address" required></textarea>
-                </div>
-            </div>
+            <?php
+                }
+              }
+             }
+           ?>
             <br>
             <div class="text-center">
-              <button type="submit" name="register" class="btn btn-space btn-primary" style="border-radius: 20px;">Register</button>
+              <button type="submit" name="update" class="btn btn-space btn-primary" style="border-radius: 20px;">Update</button>
+            </div>
+            <div class="text-center">
+              <a href="main.php">Cancel</a>
             </div>
             </form>
             <br>
-            <div class="text-center"><a href="patientLogin.php"> Account Existed? Click here to Login </a></div>
+            
         </div>
         </section>
-        <!-- Login form Section -->
+        <!-- Update form Section -->
     </section>
     
 

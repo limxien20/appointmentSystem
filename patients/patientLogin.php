@@ -122,7 +122,7 @@ function login(){
             <div class="text-center"><button type="submit" name="login" class="btn btn-space btn-primary" style="border-radius: 20px;">Login</button></div>
             </form>
             <br>
-            <div class="text-center"><a href="patientSignUp.php"> No Account? Click here to Sign Up </a></div>
+            
         </div>
         </section>
         <!-- Login form Section -->

@@ -80,7 +80,7 @@ include_once("session.php");
         <ul>
           <li><a class="nav-link scrollto " href="appointment.php">Appointment</a></li>
           <li><a class="nav-link scrollto " href="history.php">History</a></li>
-          <li><a class="nav-link scrollto " href="profile.php">Profile</a></li>
+          
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>

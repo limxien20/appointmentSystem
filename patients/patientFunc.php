@@ -1,3 +1,4 @@
+
 <?php
 
 function addPatient(){
@@ -45,6 +46,30 @@ if (isset($_POST['register'])) {
                     VALUES ('$icno','$pw','$fname','$lname','$email','$phone','$dob','$gender','$address','$country')";
         mysqli_query($db, $query);
         echo"<script>alert('Registered')</script>";
+    }
+  }
+}
+?>
+
+<?php
+function editProfile(){
+  include_once("session.php");
+  $db = mysqli_connect('localhost', 'root','','health_appointment');
+  $currentUser = $_SESSION['patient'];
+  if(isset($_POST['update'])){
+    $email = mysqli_real_escape_string($db, $_POST['edit_email']);
+    $phone = mysqli_real_escape_string($db, $_POST['edit_phone']);
+    $country = mysqli_real_escape_string($db, $_POST['edit_country']);
+    $address = mysqli_real_escape_string($db, $_POST['edit_address']);
+
+    $update_query = "UPDATE patients SET patient_email='$email', patient_phone='$phone', nationality='$country', patient_add='$address' WHERE icno = $currentUser ";
+    $runquery = mysqli_query($db,$update_query);
+
+    if($runquery){
+      echo "<script>alert('Profile Updated')</script>";
+    }
+    else{
+      echo "<script>alert('Failed to update')</script>";
     }
   }
 }

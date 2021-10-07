@@ -2,6 +2,6 @@
 
 session_start();
 if(!isset($_SESSION['patient'])){
-    header("Location: patientLogin.php");
+    header("Location: patientSignUp.php");
 }
 ?>

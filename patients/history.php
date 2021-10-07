@@ -60,7 +60,7 @@ include_once("session.php");
             if(mysqli_num_rows($result) > 0){
               while($row = mysqli_fetch_array($result)){
       ?>
-                <?php echo $row['patient_fname'];?>
+                <a href="profile.php" ><?php echo $row['patient_fname'];?>
       <?php
              }
             }
@@ -81,7 +81,6 @@ include_once("session.php");
         <ul>
           <li><a class="nav-link scrollto " href="main.php">Doctor Schedule</a></li>
           <li><a class="nav-link scrollto " href="appointment.php">Appointment</a></li>
-          <li><a class="nav-link scrollto " href="profile.php">Profile</a></li>
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
