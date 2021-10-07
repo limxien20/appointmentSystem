@@ -103,7 +103,88 @@ include_once("session.php");
           <h2>Doctor Schedule</h2>
           <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
+        <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">View All Schedule</h2>
+								<div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.php" class="breadcrumb-link">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">View All Schedule</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <div class="ecommerce-widget">
 
+						<div class="row">
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">Schedule List</h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <?php
+                                                $session = $_SESSION['doctor'];
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID";
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
+                                            <table class="table" id="docinfo">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Schedule ID</th>
+                                                        <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Doctor Name</th>
+                                                        <th class="border-0">Department</th>
+                                                        <th class="border-0">Schedule</th>
+                                                        <th class="border-0">Status</th>
+                                                        <th class="border-0"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="doclist">
+                                                    <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result) ){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['sched_id']; ?></td>
+                                                                    <td><?php echo $row['doc_id']; ?></td>
+                                                                    <td><?php echo $row['docFname']; ?></td>
+                                                                    <td><?php echo $row['doc_dept']; ?></td>
+                                                                    <td><?php echo $row['sched_datetime']; ?></td>
+                                                                    <td><?php echo $row['sched_status']; ?></td>
+                                                                </tr>    
+                                                    <?php
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                                                            
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ============================================================== -->
+                        
+                            <!-- ============================================================== -->
+                        </div>
         
 
       </div>
