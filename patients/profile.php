@@ -18,7 +18,7 @@ include_once("session.php");
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Doctor Schedule</title>
+  <title>Profile</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -75,18 +75,16 @@ include_once("session.php");
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">EchoHealth</a></h1>
+      <h1 class="logo me-auto"><a href="index.php">EchoHealth</a></h1>
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
+          <li><a class="nav-link scrollto " href="main.php">Dcctor Schedule</a></li>
           <li><a class="nav-link scrollto " href="appointment.php">Appointment</a></li>
           <li><a class="nav-link scrollto " href="history.php">History</a></li>
-          <li><a class="nav-link scrollto " href="profile.php">Profile</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
       <!-- .navbar -->
-
-      
 
     </div>
   </header>
@@ -95,29 +93,111 @@ include_once("session.php");
   <main id="main">
 
     <section class="inner-page">
-    <!-- ======= Appointment Section ======= -->
-    <section id="appointment" class="appointment section-bg">
-      <div class="container">
-        <div class="section-title">
-          <br>
-          <h2>Doctor Schedule</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+      <!-- ======= Login form Section ======= -->
+        <section id="appointment" class="appointment section-bg">
+        <div class="container">
+            <div class="section-title">
+            <br>
+            <h2>Profile</h2>
+            <p>Update your profile here</p>
+            </div>
+
+            <form action="" method="POST" class="form">
+              
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <input type="text" name="icno" class="form-control" id="icno" placeholder="ICNO." required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <input type="password" class="form-control" name="pw" id="pw" placeholder="Password" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone No." required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B" required>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <select class="form-control" name="gender" id="gender" placeholder="Gender">
+                    <option value="" disabled="" selected="">Gender</option>
+                      <?php
+                        while($row = $resultSet->fetch_assoc()){
+                          $genderid = $row['genderId'];
+                          $gender = $row['gender'];
+                          echo "<option value='$genderid' required> $gender </option>";
+                        }
+                      ?>
+                  </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                  <select class="form-control" name="country" id="country" placeholder="Country">
+                    <option value="" disabled="" selected="">Country</option>
+                      <?php
+                        while($row = $countryList->fetch_assoc()){
+                          $code = $row['code'];
+                          $country = $row['country'];
+                          echo "<option value='$code' required> $country </option>";
+                        }
+                      ?>
+                  </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 offset-md-4 form-group">
+                <textarea class="form-control" id="address" name="address" rows="4" cols="47" placeholder="Address" required></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="text-center">
+              <button type="submit" name="register" class="btn btn-space btn-primary" style="border-radius: 20px;">Register</button>
+            </div>
+            </form>
+            <br>
+            <div class="text-center"><a href="patientLogin.php"> Account Existed? Click here to Login </a></div>
         </div>
-
-        
-
-      </div>
-    </section><!-- End Appointment Section -->
+        </section>
+        <!-- Login form Section -->
     </section>
     
 
-  </main>
-  <!-- End #main -->
+  </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-
-    <div class="footer-top"></div>
 
     <div class="container d-md-flex py-4">
 
@@ -139,9 +219,6 @@ include_once("session.php");
     </div>
   </footer>
   <!-- End Footer -->
-
-  <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
