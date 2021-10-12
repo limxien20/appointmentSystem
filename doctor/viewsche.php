@@ -110,7 +110,77 @@ include_once("session.php");
                                                 $session = $_SESSION['doctor'];
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session'";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session' AND DATE(doc_sched.sched_datetime) >= CURDATE()";
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
+                                            <table class="table" id="docinfo">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Schedule ID</th>
+                                                        <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Doctor Name</th>
+                                                        <th class="border-0">Department</th>
+                                                        <th class="border-0">Schedule</th>
+                                                        <th class="border-0">Status</th>
+                                                        <th class="border-0"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="doclist">
+                                                    <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result) ){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['sched_id']; ?></td>
+                                                                    <td><?php echo $row['doc_id']; ?></td>
+                                                                    <td><?php echo $row['docFname']; ?></td>
+                                                                    <td><?php echo $row['doc_dept']; ?></td>
+                                                                    <td><?php echo $row['sched_datetime']; ?></td>
+                                                                    <td><?php echo $row['sched_status']; ?></td>
+                                                                    <td>
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="move_id" value="<?php echo $row['sched_id']; ?>">
+                                                                            <button type="submit" name="move"class="btn btn-danger">Delete</button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>    
+                                                    <?php
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                                                            
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ============================================================== -->
+                        
+                            <!-- ============================================================== -->
+                        </div>
+
+                        <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">Past Schedule List</h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <?php
+                                                $session = $_SESSION['doctor'];
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session' AND DATE(doc_sched.sched_datetime) < CURDATE()";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
