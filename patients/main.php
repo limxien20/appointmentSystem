@@ -5,8 +5,9 @@ include_once("session.php");
 <?php
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $currentUser = $_SESSION['patient'];
-    $query = "SELECT patient_fname FROM patients WHERE icno ='$currentUser'";
+    $query = "SELECT patient_fname FROM patients WHERE icno ='$currentUser' ";
     $result = mysqli_query($conn,$query);
+    
 
     
 ?>
@@ -124,14 +125,14 @@ include_once("session.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Schedule List</h5>
+                                    <h5 class="card-header">Schedule List <?=  date('Y-m-d');?></h5> 
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
                                                 
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE DATE(doc_sched.sched_datetime) >= CURDATE() ";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -150,7 +151,7 @@ include_once("session.php");
                                                 <tbody id="doclist">
                                                     <?php                                                  
                                                         if(mysqli_num_rows($result) > 0 ){
-                                                            while($row = mysqli_fetch_array($result) ){
+                                                            while($row = mysqli_fetch_array($result)){
                                                     ?>
                                                                 <tr>
                                                                     <td><?php echo $row['sched_id']; ?></td>
