@@ -142,13 +142,13 @@ include_once("session.php");
                                         <div class="form-group row">
                                             <label for="datetime" class="col-3 col-lg-2 col-form-label text-right">Date & Time: </label>
                                             <div class="col-5">
-                                            <input id="schedDatetime" type="datetime-local" name="schedDatetime" value=""class="form-control" >
+                                            <input id="schedDatetime" type="datetime-local" name="schedDatetime" value=""class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="department" class="col-3 col-lg-2 col-form-label text-right">Availability: </label>
                                             <div class="col-5">
-                                                <select name= "availability" class="form-control">
+                                                <select name= "availability" class="form-control" required>
                                                     <option value="" disabled="" selected="">Availability</option>
                                                     <option value="available">Available</option>
                                                     <option value="not available">Not Available</option>
