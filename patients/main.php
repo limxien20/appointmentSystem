@@ -1,5 +1,5 @@
 <?php
-include_once("session.php");
+include_once("psession.php");
 ?>
 
 <?php
@@ -66,7 +66,7 @@ include_once("session.php");
               }
              }
            ?>
-        <a href="logout.php" >, Logout</a>
+        <a href="patientlogout.php" >, Logout</a>
         
       </div>
     </div>
@@ -161,8 +161,8 @@ include_once("session.php");
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
                                                                     <td>
-                                                                        <form action="" method="POST">
-                                                                            <input type="hidden" name="delete_id" value="<?php echo $row['docID']; ?>">
+                                                                        <form action="appointment.php" method="POST">
+                                                                            <input type="hidden" name="appointment_id" value="<?php echo $row['docID']; ?>">
                                                                             <button type="submit" name="delBtn"class="btn btn-primary">Book</button>
                                                                         </form>
                                                                     </td>

@@ -1,5 +1,5 @@
 <?php
-include_once("session.php");
+include_once("psession.php");
 ?>
 <?php include("patientFunc.php") ?>
 
@@ -75,7 +75,7 @@ include_once("session.php");
       ?>
         <a href="profile.php" ><?php echo $row['patient_fname'];?></a>
         
-        <a href="logout.php" >, Logout</a>
+        <a href="patientlogout.php" >, Logout</a>
         
       </div>
     </div>
