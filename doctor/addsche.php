@@ -139,12 +139,14 @@ include_once("session.php");
                                                 }
                                             }
                                         ?>
+                                        
                                         <div class="form-group row">
-                                            <label for="datetime" class="col-3 col-lg-2 col-form-label text-right">Date & Time: </label>
+                                            <label for="datetime" class="col-3 col-lg-2 col-form-label text-right">Date: </label>
                                             <div class="col-5">
-                                            <input id="schedDatetime" type="datetime-local" name="schedDatetime" value=""class="form-control" required>
+                                            <input id="schedDatetime" type="datetime-local" name="schedDatetime" min="<?=  date('Y-m-d');?>T08:00" value=""class="form-control" required>
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group row">
                                             <label for="department" class="col-3 col-lg-2 col-form-label text-right">Availability: </label>
                                             <div class="col-5">
