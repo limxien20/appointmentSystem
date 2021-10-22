@@ -100,58 +100,42 @@ include_once("psession.php");
         <div class="section-title">
           <br>
           <h2>Make an Appointment</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
         </div>
+        <?php
+            if(isset($_POST['bookBtn'])){
+                                            
+              $db = mysqli_connect('localhost', 'root','','health_appointment');
+              $id = $_POST['schedid'];
 
-        <form action="forms/appointment.php" method="post" role="form" class="php-email-form">
-          <div class="row">
-            <div class="col-md-4 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3 mt-md-0">
-              <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4 form-group mt-3">
-              <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="department" id="department" class="form-select">
-                <option value="">Select Department</option>
-                <option value="Department 1">Department 1</option>
-                <option value="Department 2">Department 2</option>
-                <option value="Department 3">Department 3</option>
-              </select>
-              <div class="validate"></div>
-            </div>
-            <div class="col-md-4 form-group mt-3">
-              <select name="doctor" id="doctor" class="form-select">
-                <option value="">Select Doctor</option>
-                <option value="Doctor 1">Doctor 1</option>
-                <option value="Doctor 2">Doctor 2</option>
-                <option value="Doctor 3">Doctor 3</option>
-              </select>
-              <div class="validate"></div>
-            </div>
-          </div>
+              $query ="SELECT * FROM doc_sched WHERE sched_id = '$id'";
+              $result = mysqli_query($db, $query);
 
-          <div class="form-group mt-3">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
-            <div class="validate"></div>
+              if($result){
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_array($result)){
+              ?>
+
+        <form action="" method="post" class="form" >
+        
+        <div class="form-group row">
+          <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">ICNO. : </label>
+              <div class="col-9 col-lg-5">
+                <input type="text" name="patienticno" class="form-control" id="icno" value="<?php echo $_SESSION['patient']; ?>">
+              </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 form-group">
+            <input type="text" name="name" class="form-control" id="name" value="<?php echo $row['sched_id']?>">
           </div>
-          <div class="mb-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
-          </div>
+        </div>
+            <?php
+                                                    }
+                                                }
+                                            }
+                                        }
+            ?>
+            
+           
           <div class="text-center"><button type="submit">Make an Appointment</button></div>
         </form>
 

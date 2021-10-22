@@ -125,7 +125,7 @@ include_once("psession.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Schedule List <?=  date('Y-m-d');?></h5> 
+                                    <h5 class="card-header">Schedule List</h5> 
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
@@ -162,8 +162,8 @@ include_once("psession.php");
                                                                     <td><?php echo $row['sched_status']; ?></td>
                                                                     <td>
                                                                         <form action="appointment.php" method="POST">
-                                                                            <input type="hidden" name="appointment_id" value="<?php echo $row['docID']; ?>">
-                                                                            <button type="submit" name="delBtn"class="btn btn-primary">Book</button>
+                                                                            <input type="hidden" name="schedid" value="<?php echo $row['sched_id']; ?>">
+                                                                            <button type="submit" name="bookBtn"class="btn btn-primary">Book</button>
                                                                         </form>
                                                                     </td>
                                                                 </tr>    

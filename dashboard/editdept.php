@@ -125,7 +125,7 @@ include_once("session.php");
                                                 ?>
 
                                     <form id="form" action="" method="POST">
-                                    <div class="form-group row">
+                                        <div class="form-group row">
                                             <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Department ID. : </label>
                                             <div class="col-9 col-lg-10">
                                                 <input id="edit_deptid" type="text" name="edit_deptid" value="<?php echo $row['departmentID']?>" class="form-control" readonly>
