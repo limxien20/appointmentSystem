@@ -140,7 +140,7 @@ include_once("psession.php");
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
                                                         <th class="border-0">Schedule ID</th>
-                                                        <th class="border-0">Doctor ID</th>
+                                                        <!--<th class="border-0">Doctor ID</th>-->
                                                         <th class="border-0">Doctor Name</th>
                                                         <th class="border-0">Department</th>
                                                         <th class="border-0">Schedule</th>
@@ -155,8 +155,8 @@ include_once("psession.php");
                                                     ?>
                                                                 <tr>
                                                                     <td><?php echo $row['sched_id']; ?></td>
-                                                                    <td><?php echo $row['doc_id']; ?></td>
-                                                                    <td><?php echo $row['docFname']; ?></td>
+                                                                    <!--<td><?php echo $row['doc_id']; ?></td>-->
+                                                                    <td>Dr. <?php echo $row['docFname']; ?></td>
                                                                     <td><?php echo $row['doc_dept']; ?></td>
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>

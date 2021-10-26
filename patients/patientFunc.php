@@ -53,7 +53,7 @@ if (isset($_POST['register'])) {
 
 <?php
 function editProfile(){
-  include_once("session.php");
+  //include_once("session.php");
   $db = mysqli_connect('localhost', 'root','','health_appointment');
   $currentUser = $_SESSION['patient'];
   if(isset($_POST['update'])){
@@ -74,4 +74,32 @@ function editProfile(){
   }
 }
 
+?>
+
+<?php
+
+function appointment(){
+
+//connect to database
+$db = mysqli_connect('localhost', 'root','','health_appointment');
+
+//check connection of the database 
+if (!$db) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+if (isset($_POST['appointment'])) {
+  // receive all input values from the form
+  $patientid = mysqli_real_escape_string($db, $_POST['patienticno']);
+  $schedid = mysqli_real_escape_string($db, $_POST['schedid']);
+  $docid = mysqli_real_escape_string($db, $_POST['docid']);
+  $remarks = mysqli_real_escape_string($db, $_POST['remarks']);
+  
+  $query = "INSERT INTO appointment (patientID,schedID,docID,remarks) 
+              VALUES('$patientid','$schedid','$docid', '$remarks')";
+  mysqli_query($db, $query);
+  echo"<script>alert('Done Appointment')</script>";
+      
+}
+}
 ?>

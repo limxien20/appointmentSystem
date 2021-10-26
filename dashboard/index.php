@@ -54,7 +54,7 @@ include_once("session.php");
 
                             chart.draw(data, options);
                         }
-                        </script>
+    </script>
 </head>
 
 <body>

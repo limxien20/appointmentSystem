@@ -1,7 +1,10 @@
-<!-- after patient sign up  and will direct to this page -->
 <?php
 include_once("psession.php");
 ?>
+<?php include("patientFunc.php")?>
+<?php appointment()?>
+
+
 <?php
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $currentUser = $_SESSION['patient'];
@@ -107,7 +110,9 @@ include_once("psession.php");
               $db = mysqli_connect('localhost', 'root','','health_appointment');
               $id = $_POST['schedid'];
 
-              $query ="SELECT * FROM doc_sched WHERE sched_id = '$id'";
+              //$query ="SELECT * FROM doc_sched WHERE sched_id = '$id'";
+              $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
+                        FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE sched_id = '$id' ";
               $result = mysqli_query($db, $query);
 
               if($result){
@@ -118,25 +123,67 @@ include_once("psession.php");
         <form action="" method="post" class="form" >
         
         <div class="form-group row">
-          <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">ICNO. : </label>
-              <div class="col-9 col-lg-5">
-                <input type="text" name="patienticno" class="form-control" id="icno" value="<?php echo $_SESSION['patient']; ?>">
+          <label for="" class="col-3 col-lg-2 col-form-label text-right">ICNO. : </label>
+              <div class="col-md-4 form-group">
+                <input type="text" name="patienticno" class="form-control" id="icno" value="<?php echo $_SESSION['patient']; ?>" readonly>
               </div>
         </div>
-        <div class="row">
+        <br>
+        <div class="form-group row">
+        <label for="" class="col-3 col-lg-2 col-form-label text-right">Schedule ID. : </label>
           <div class="col-md-4 form-group">
-            <input type="text" name="name" class="form-control" id="name" value="<?php echo $row['sched_id']?>">
+            <input type="text" name="schedid" class="form-control" id="schedid" value="<?php echo $row['sched_id']?>" readonly>
           </div>
         </div>
+        <br>
+        <div class="form-group row">
+        <label for="" class="col-3 col-lg-2 col-form-label text-right">Doctor ID. : </label>
+          <div class="col-md-4 form-group">
+            <input type="text" name="docid" class="form-control" id="docid" value="<?php echo $row['doc_id']?>" readonly>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+        <label for="" class="col-3 col-lg-2 col-form-label text-right">Doctor Name. : </label>
+          <div class="col-md-4 form-group">
+            <input type="text" name="" class="form-control" id="" value="Dr. <?php echo $row['docFname']?>" readonly>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+        <label for="" class="col-3 col-lg-2 col-form-label text-right">Department. : </label>
+          <div class="col-md-4 form-group">
+            <input type="text" name="" class="form-control" id="" value="<?php echo $row['doc_dept']?>" readonly>
+          </div>
+        </div>
+        <br>
+        <div class="form-group row">
+        <label for="" class="col-3 col-lg-2 col-form-label text-right">Appointment Time : </label>
+          <div class="col-md-4 form-group">
+            <input type="text" name="" class="form-control" id="" value="<?php echo $row['sched_datetime']?>" readonly>
+          </div>
+        </div>
+        <br>
+      
+
             <?php
                                                     }
                                                 }
                                             }
                                         }
             ?>
+        <div class="form-group row">
+        <label for="" class="col-3 col-lg-2 col-form-label text-right">Medical concern/remarks : </label>
+          <div class="col-md-4 form-group">
+            <textarea id="remarks" name="remarks" rows="4" cols="50" required></textarea>
+          </div>
+        </div>
             
            
-          <div class="text-center"><button type="submit">Make an Appointment</button></div>
+          <div class="text-center">
+            <br>
+            <button type="submit" name="appointment" class="btn btn-space btn-primary" style="border-radius: 20px;">Make an appointment</button>
+          </div>
         </form>
 
       </div>
