@@ -95,96 +95,67 @@ include_once("session.php");
 					<body>
 					<div class="ecommerce-widget">
 
-						<div class="row">
-							<!-- ============================================================== -->
+                    <div class="row">
+                            <!-- ============================================================== -->
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-								<h5 class="card-header">Assign Task</h5>
-									<div class="card-body">
-                                    <form id="form">
-										<div class="form-group row">
-                                            <label class="col-3 col-lg-2 col-form-label text-right">Staff</label>
-                                            <div class="col-9 col-lg-10">
-                                                <input id="staff" type="text" name="staff" required="required" placeholder="Staff ID" class="form-control">
-                                            </div>
-                                        </div>
-										<div class="form-group row">
-                                            <label class="col-3 col-lg-2 col-form-label text-right">Order</label>
-                                            <div class="col-9 col-lg-10">
-                                                <input id="order" type="text" name="order" required="required" placeholder="Order ID" class="form-control">
-                                            </div>
-                                        </div>
-										<div class="row pt-2 pt-sm-5 mt-1">
-                                            <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
-                                            </div>
-                                            <div class="col-sm-6 pl-0">
-                                                <p class="text-right">
-                                                    <button id="submit" class="btn btn-space btn-primary">Submit</button>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </form>
-									</div>
-                                </div>
-                            </div>
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-						</div>
-
-						<div class="row">
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="card">
-                                    <h5 class="card-header">Order List
-										<button class="btn btn-outline-light float-right" onclick="getOrders()">Refresh</button>
-									</h5>
+                                    <h5 class="card-header">Schedule List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
-                                            <table class="table">
+                                            <?php
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $query = "SELECT * FROM appointment ";
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
+                                            <table class="table" id="docinfo">
                                                 <thead class="bg-light">
                                                     <tr class="border-0">
-                                                        <th class="border-0 text-right">Id</th>
-                                                        <th class="border-0">Customer</th>
-														<th class="border-0">Service</th>
-                                                        <th class="border-0">Date Added</th>
-														<th class="border-0">Status</th>
+                                                        <th class="border-0">Appointment ID</th>
+                                                        <th class="border-0">Patient ID</th>
+                                                        <th class="border-0">Schedule ID</th>
+                                                        <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Remarks</th>
+                                                        <th class="border-0"></th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="orderlist">
+                                                <tbody id="doclist">
+                                                    <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result) ){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['appointment_id']; ?></td>
+                                                                    <td><?php echo $row['patientID']; ?></td>
+                                                                    <td><?php echo $row['schedID']; ?></td>
+                                                                    <td><?php echo $row['docID']; ?></td>
+                                                                    <td><?php echo $row['remarks']; ?></td>
+                                                                    <!--<td>
+                                                                        <form action="" method="POST">
+                                                                            <input type="hidden" name="move_id" value="<?php //echo $row['sched_id']; ?>">
+                                                                            <button type="submit" name="move"class="btn btn-danger">Delete</button>
+                                                                        </form>
+                                                                    </td>-->
+                                                                </tr>    
+                                                    <?php
 
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                                                            
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="card">
-                                    <h5 class="card-header">Staff List
-										<button class="btn btn-outline-light float-right" onclick="getFreeStaffs()">Refresh</button>
-									</h5>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="border-0 text-right">id</th>
-                                                        <th class="border-0">Name</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="freestafflist">
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ============================================================== -->
+                            </div>                          
+                            <!-- ============================================================== -->               
                             <!-- ============================================================== -->
                         </div>
 					</div>
