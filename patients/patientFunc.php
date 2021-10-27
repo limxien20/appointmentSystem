@@ -97,7 +97,9 @@ if (isset($_POST['appointment'])) {
   
   $query = "INSERT INTO appointment (patientID,schedID,docID,remarks) 
               VALUES('$patientid','$schedid','$docid', '$remarks')";
+  $booked = "UPDATE doc_sched SET sched_status='Booked' WHERE sched_id = '$schedid'";
   mysqli_query($db, $query);
+  mysqli_query($db, $booked);
   echo"<script>alert('Done Appointment')</script>";
       
 }

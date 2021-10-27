@@ -138,12 +138,7 @@ include_once("session.php");
                                                                     <td><?php echo $row['doc_dept']; ?></td>
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
-                                                                    <td>
-                                                                        <form action="editsche.php" method="POST">
-                                                                            <input type="hidden" name="edit_id" value="<?php echo $row['sched_id']; ?>">
-                                                                            <button type="submit" name="editBtn"class="btn btn-warning" style="border-radius: 5px;">Edit</button>
-                                                                        </form>
-                                                                    </td>
+                                                                    
                                                                     <td>
                                                                         <form action="" method="POST">
                                                                             <input type="hidden" name="move_id" value="<?php echo $row['sched_id']; ?>">
