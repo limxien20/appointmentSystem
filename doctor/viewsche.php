@@ -123,6 +123,7 @@ include_once("session.php");
                                                         <th class="border-0">Department</th>
                                                         <th class="border-0">Schedule</th>
                                                         <th class="border-0">Status</th>
+                                                        
                                                         <th class="border-0"></th>
                                                     </tr>
                                                 </thead>
@@ -139,6 +140,8 @@ include_once("session.php");
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
                                                                     
+                                                                    
+
                                                                     <td>
                                                                         <form action="" method="POST">
                                                                             <input type="hidden" name="move_id" value="<?php echo $row['sched_id']; ?>">
@@ -265,6 +268,7 @@ include_once("session.php");
                                                         <th class="border-0">Schedule</th>
                                                         <th class="border-0">Status</th>
                                                         <th class="border-0"></th>
+                                                        <th class="border-0"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="doclist">
@@ -279,6 +283,12 @@ include_once("session.php");
                                                                     <td><?php echo $row['doc_dept']; ?></td>
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
+                                                                    <td>
+                                                                        <form action="viewhistory.php" method="POST">
+                                                                            <input type="hidden" name="view_id" value="<?php echo $row['sched_id']; ?>">
+                                                                            <button type="submit" name="view"class="btn btn-primary">View</button>
+                                                                        </form>
+                                                                    </td>
                                                                     <td>
                                                                         <form action="" method="POST">
                                                                             <input type="hidden" name="move_id" value="<?php echo $row['sched_id']; ?>">
