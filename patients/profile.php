@@ -169,7 +169,7 @@ include_once("psession.php");
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
                   <select class="form-control" name="edit_country" id="country" placeholder="Country">
-                  <option value="<?php echo $row['nationality'];?>" disabled="" selected="" required><?php echo $row['nationality'];?></option>
+                  <option value="<?php echo $row['nationality'];?>" selected="" readonly><?php echo $row['nationality'];?></option>
                       <?php
                         while($countryrow = $countryList->fetch_array()){
                           $code = $countryrow['code'];

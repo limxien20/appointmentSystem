@@ -2,12 +2,12 @@
 include_once("psession.php");
 ?>
 
-
 <?php
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $currentUser = $_SESSION['patient'];
-    $query = "SELECT patient_fname FROM patients WHERE icno ='$currentUser'";
+    $query = "SELECT patient_fname FROM patients WHERE icno ='$currentUser' ";
     $result = mysqli_query($conn,$query);
+    
 
     
 ?>
@@ -19,7 +19,7 @@ include_once("psession.php");
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>History</title>
+  <title>Doctor Schedule</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -60,12 +60,12 @@ include_once("psession.php");
             if(mysqli_num_rows($result) > 0){
               while($row = mysqli_fetch_array($result)){
       ?>
-                <a href="profile.php" ><?php echo $row['patient_fname'];?>
-      <?php
+        <a href="profile.php" ><?php echo $row['patient_fname'];?></a>
+        <?php
+                }
+              }
              }
-            }
-        }
-      ?>
+           ?>
         <a href="patientlogout.php" >, Logout</a>
         
       </div>
@@ -80,7 +80,6 @@ include_once("psession.php");
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto " href="main.php">Doctor Schedule</a></li>
-          <li><a class="nav-link scrollto " href="appointment.php">Appointment</a></li>
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -102,9 +101,97 @@ include_once("psession.php");
         <div class="section-title">
           <br>
           <h2>History</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>View History Here</p>
         </div>
+        <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">View All History</h2>
+								<div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <div class="ecommerce-widget">
 
+						<div class="row">
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">History List</h5> 
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <?php
+                                                
+                                                $p = $_SESSION['patient'];
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $query = "SELECT appointment.appointment_id, appointment.schedID, appointment.docID, doctors.docFname FROM appointment 
+                                                INNER JOIN doctors ON appointment.docID = doctors.docID INNER JOIN doc_sched ON appointment.docID = doc_sched.doc_id
+                                                WHERE appointment.patientID = '$p' AND doc_sched.sched_status ='Done'";
+                                                //$query = "SELECT * FROM appointment WHERE patientID = '$p'";
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
+                                            <table class="table" id="docinfo">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Appointment ID</th>
+                                                        <th class="border-0">Schedule</th>
+                                                        <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Doctor Name</th>
+                                                        
+                                                        <th class="border-0"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="doclist">
+                                                    <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result)){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['appointment_id']; ?></td>
+                                                                    <td><?php echo $row['schedID']; ?></td>
+                                                                    <td><?php echo $row['docID']; ?></td>
+                                                                    <td>Dr. <?php echo $row['docFname']; ?></td>
+                                                                    
+                                                                    
+                                                                    <td>
+                                                                        <form action="viewHistory.php" method="POST">
+                                                                            <input type="hidden" name="appointID" value="<?php echo $row['appointment_id']; ?>">
+                                                                            <button type="submit" name="viewHisBtn"class="btn btn-primary">View</button>
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>    
+                                                    <?php
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                                                            
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ============================================================== -->
+                        
+                            <!-- ============================================================== -->
+                        </div>
+
+                        
         
 
       </div>
@@ -155,3 +242,5 @@ include_once("psession.php");
   <script src="assets/js/main.js"></script>
 
 </body>
+
+</html>

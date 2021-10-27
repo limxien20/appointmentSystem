@@ -79,7 +79,6 @@ include_once("psession.php");
       <h1 class="logo me-auto"><a href="main.php">EchoHealth</a></h1>
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto " href="appointment.php">Appointment</a></li>
           <li><a class="nav-link scrollto " href="history.php">History</a></li>
           
         </ul>
