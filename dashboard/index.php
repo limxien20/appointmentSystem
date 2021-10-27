@@ -131,9 +131,17 @@ include_once("session.php");
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                 <div class="card border-3 border-top border-top-primary">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Registered Patient</h5>
+                                        <h5 class="text-muted">Today's Appointments</h5>
                                         <div class="metric-value d-inline-block">
-                                        <h1 class="mb-1">12</h1>
+                                            <!--<h1 class="mb-1">10</h1>-->
+                                            <?php
+                                                
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'booked' AND DATE(sched_datetime) = CURDATE()");
+                                                $row = mysqli_num_rows($result);
+                                                echo '<h1 class="mb-1">' .$row. '</h1>';
+                                            
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -143,9 +151,57 @@ include_once("session.php");
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
                                 <div class="card border-3 border-top border-top-primary">
                                     <div class="card-body">
-                                        <h5 class="text-muted">Appointments</h5>
+                                        <h5 class="text-muted">Upcoming Appointments</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">10</h1>
+                                            <!--<h1 class="mb-1">10</h1>-->
+                                            <?php
+                                                
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'Booked'");
+                                                $row = mysqli_num_rows($result);
+                                                echo '<h1 class="mb-1">' .$row. '</h1>';
+                                            
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="card border-3 border-top border-top-primary">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Available Schedule</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <!--<h1 class="mb-1">10</h1>-->
+                                            <?php
+                                                
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'available'");
+                                                $row = mysqli_num_rows($result);
+                                                echo '<h1 class="mb-1">' .$row. '</h1>';
+                                            
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="card border-3 border-top border-top-primary">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Done Appointments</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <!--<h1 class="mb-1">10</h1>-->
+                                            <?php
+                                                
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'Done'");
+                                                $row = mysqli_num_rows($result);
+                                                echo '<h1 class="mb-1">' .$row. '</h1>';
+                                            
+                                            ?>
                                         </div>
                                     </div>
                                 </div>
@@ -187,38 +243,28 @@ include_once("session.php");
                                 </div>
                             </div>
                             <!-- ============================================================== -->
-                        </div>
-                        <div class="row">
                             <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="card">
-                                    <h5 class="card-header">Recent Appointment
-										<button class="btn btn-outline-light float-right" onclick="recentOrders()">Refresh</button>
-									</h5>
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class="bg-light">
-                                                    <tr class="border-0">
-                                                        <th class="border-0 text-right">ID</th>
-                                                        <th class="border-0">Patient(s)</th>
-                                                        <th class="border-0">Time</th>
-                                                        <th class="border-0">Date</th>
-                                                        <th class="border-0">Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="recentorderlist">
-
-                                                </tbody>
-                                            </table>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="card border-3 border-top border-top-primary">
+                                    <div class="card-body">
+                                        <h5 class="text-muted">Registered Patient</h5>
+                                        <div class="metric-value d-inline-block">
+                                        <!--<h1 class="mb-1">10</h1>-->
+                                        <?php
+                                                
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $result = $conn->query("SELECT icno FROM patients");
+                                                $row = mysqli_num_rows($result);
+                                                echo '<h1 class="mb-1">' .$row. '</h1>';
+                                            
+                                        ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- ============================================================== -->
-                            <!-- ============================================================== -->
                         </div>
+                        
                     </div>
                 </div>
             </div>

@@ -107,7 +107,7 @@ include_once("session.php");
                                                 
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID AND DATE(doc_sched.sched_datetime) >= CURDATE()";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID AND DATE(doc_sched.sched_datetime) >= CURDATE() AND doc_sched.sched_status = 'available'";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -164,14 +164,78 @@ include_once("session.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Past Schedule List</h5>
+                                    <h5 class="card-header"> Booked Schedule List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
                                                 
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID AND DATE(doc_sched.sched_datetime) < CURDATE()";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID AND DATE(doc_sched.sched_datetime) >= CURDATE() AND doc_sched.sched_status = 'Booked'";
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
+                                            <table class="table" id="docinfo">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Schedule ID</th>
+                                                        <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Doctor Name</th>
+                                                        <th class="border-0">Department</th>
+                                                        <th class="border-0">Schedule</th>
+                                                        <th class="border-0">Status</th>
+                                                        <th class="border-0"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="doclist">
+                                                    <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result) ){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['sched_id']; ?></td>
+                                                                    <td><?php echo $row['doc_id']; ?></td>
+                                                                    <td><?php echo $row['docFname']; ?></td>
+                                                                    <td><?php echo $row['doc_dept']; ?></td>
+                                                                    <td><?php echo $row['sched_datetime']; ?></td>
+                                                                    <td><?php echo $row['sched_status']; ?></td>
+                                                                </tr>    
+                                                    <?php
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                                                            
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ============================================================== -->
+                        
+                            <!-- ============================================================== -->
+                        </div>
+
+                        <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">Done Schedule List</h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <?php
+                                                
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID AND DATE(doc_sched.sched_datetime) >= CURDATE() AND doc_sched.sched_status = 'Done'";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>

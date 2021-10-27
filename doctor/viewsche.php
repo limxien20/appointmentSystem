@@ -244,14 +244,14 @@ include_once("session.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Past Schedule List</h5>
+                                    <h5 class="card-header">Done Consultation List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
                                                 $session = $_SESSION['doctor'];
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session' AND DATE(doc_sched.sched_datetime) < CURDATE()";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session' AND doc_sched.sched_status ='Done'";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -308,6 +308,7 @@ include_once("session.php");
                         
                             <!-- ============================================================== -->
                         </div>
+
                 </div>
             </div>
             <!-- ============================================================== -->

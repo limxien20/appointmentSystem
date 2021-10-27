@@ -99,13 +99,14 @@ include_once("session.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Schedule List</h5>
+                                    <h5 class="card-header">Appointment List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
                                                 $session = $_SESSION['doctor'];
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
-                                                $query = "SELECT * FROM appointment WHERE docID = '$session'";
+                                                //$query = "SELECT * FROM appointment WHERE docID = '$session'";
+                                                $query = "SELECT * FROM appointment INNER JOIN doc_sched ON appointment.schedID = doc_sched.sched_id WHERE doc_sched.sched_status='Booked' AND appointment.docID = '$session' ";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -116,6 +117,7 @@ include_once("session.php");
                                                         <th class="border-0">Patient ID</th>
                                                         <th class="border-0">Schedule ID</th>
                                                         <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Doctor Stat</th>
                                                         <th class="border-0">Remarks</th>
                                                         <th class="border-0"></th>
                                                     </tr>
@@ -130,13 +132,14 @@ include_once("session.php");
                                                                     <td><?php echo $row['patientID']; ?></td>
                                                                     <td><?php echo $row['schedID']; ?></td>
                                                                     <td><?php echo $row['docID']; ?></td>
+                                                                    <td><?php echo $row['sched_status']; ?></td>
                                                                     <td><?php echo $row['remarks']; ?></td>
-                                                                    <!--<td>
-                                                                        <form action="" method="POST">
-                                                                            <input type="hidden" name="move_id" value="<?php //echo $row['sched_id']; ?>">
-                                                                            <button type="submit" name="move"class="btn btn-danger">Delete</button>
+                                                                    <td>
+                                                                        <form action="remark.php" method="POST">
+                                                                            <input type="hidden" name="appointment_id" value="<?php echo $row['appointment_id']; ?>">
+                                                                            <button type="submit" name="remarkBtn"class="btn btn-primary">Remark</button>
                                                                         </form>
-                                                                    </td>-->
+                                                                    </td>
                                                                 </tr>    
                                                     <?php
 

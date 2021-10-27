@@ -100,12 +100,12 @@ include_once("session.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">Schedule List</h5>
+                                    <h5 class="card-header">Appointment List</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
-                                                $query = "SELECT * FROM appointment ";
+                                                $query = "SELECT * FROM appointment INNER JOIN doc_sched ON appointment.schedID = doc_sched.sched_id ";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -116,8 +116,8 @@ include_once("session.php");
                                                         <th class="border-0">Patient ID</th>
                                                         <th class="border-0">Schedule ID</th>
                                                         <th class="border-0">Doctor ID</th>
-                                                        <th class="border-0">Remarks</th>
-                                                        <th class="border-0"></th>
+                                                        <th class="border-0">Appointment Status</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody id="doclist">
@@ -130,15 +130,10 @@ include_once("session.php");
                                                                     <td><?php echo $row['patientID']; ?></td>
                                                                     <td><?php echo $row['schedID']; ?></td>
                                                                     <td><?php echo $row['docID']; ?></td>
-                                                                    <td><?php echo $row['remarks']; ?></td>
-                                                                    <!--<td>
-                                                                        <form action="" method="POST">
-                                                                            <input type="hidden" name="move_id" value="<?php //echo $row['sched_id']; ?>">
-                                                                            <button type="submit" name="move"class="btn btn-danger">Delete</button>
-                                                                        </form>
-                                                                    </td>-->
+                                                                    <td><?php echo $row['sched_status']; ?></td>
                                                                 </tr>    
                                                     <?php
+
 
                                                             }
                                                         }

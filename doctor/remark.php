@@ -1,9 +1,9 @@
-<?php //include("includes/header.php") ?>
-<?php include("deptFunc.php") ?>
-<?php editDept() ?>
+<?php include("remarkFunc.php") ?>
 <?php
 include_once("session.php");
 ?>
+<?php comment() ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -12,7 +12,6 @@ include_once("session.php");
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin Panel - Edit Department</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="./assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="./assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -51,7 +50,7 @@ include_once("session.php");
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
 								<div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name" id="id">
-                                    <?php echo $_SESSION['user'];?>
+                                    <?php echo $_SESSION['doctor'];?>
                                     </h5>
                                 </div>
                                 <a href="logout.php" class="dropdown-item" ><i class="fas fa-power-off mr-2"></i>Logout</a>
@@ -84,12 +83,12 @@ include_once("session.php");
 					<div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Edit Department</h2>
+                                <h2 class="pageheader-title">Patient's record</h2>
 								<div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="index.php" class="breadcrumb-link">Home</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Edit Department</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Patient's record</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -107,54 +106,83 @@ include_once("session.php");
                         <!-- ============================================================== -->
 						<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
-                                <h5 class="card-header">Edit Department</h5>
+                                <h5 class="card-header">Patient's record</h5>
                                 <div class="card-body">
-                                    <?php
-                                        if(isset($_POST['editBtn'])){
+                                <?php
+                                        if(isset($_POST['remarkBtn'])){
                                             
                                             $db = mysqli_connect('localhost', 'root','','health_appointment');
-                                            $id = $_POST['edit_id'];
+                                            $id = $_POST['appointment_id'];
 
-                                            $query ="SELECT * FROM department WHERE departmentID = '$id'";
+                                            //$query ="SELECT * FROM appointment WHERE appointment_id = '$id'";
+                                            $query ="SELECT appointment.appointment_id, appointment.patientID, patients.patient_fname, patients.patient_lname, appointment.schedID, appointment.docID, appointment.remarks FROM appointment 
+                                                    INNER JOIN patients ON appointment.patientID = patients.icno WHERE appointment.appointment_id = '$id'";
                                             $result = mysqli_query($db, $query);
 
                                             if($result){
                                                 if(mysqli_num_rows($result) > 0){
                                                   while($row = mysqli_fetch_array($result)){
                                                 ?>
-
                                     <form id="form" action="" method="POST">
+                                    
                                         <div class="form-group row">
-                                            <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Department ID. : </label>
-                                            <div class="col-9 col-lg-10">
-                                                <input id="edit_deptid" type="text" name="edit_deptid" value="<?php echo $row['departmentID']?>" class="form-control" readonly>
-                                            </div>
+                                            <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Appointment ID. : </label>
+                                                <div class="col-5 ">
+                                                    <input id="docid" type="text" name="appointmentid" value="<?php echo $row['appointment_id'];?>" class="form-control" readonly>
+                                                </div>
                                         </div>
-										<div class="form-group row">
-                                            <label for="inputPassword" class="col-3 col-lg-2 col-form-label text-right">Department Name: </label>
-                                            <div class="col-9 col-lg-10">
-                                                <input id="edit_deptName" type="text" name="edit_deptName" value="<?php echo $row['departmentName']?>" class="form-control">
-                                            </div>
+                                        <div class="form-group row">
+                                            <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Schedule ID. : </label>
+                                                <div class="col-5 ">
+                                                    <input id="docid" type="text" name="schedid" value="<?php echo $row['schedID'];?>" class="form-control" readonly>
+                                                </div>
                                         </div>
-
+                                        <div class="form-group row">
+                                                            <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Patient's ID. : </label>
+                                                            <div class="col-5 ">
+                                                                <input id="docid" type="text" name="patientid" value="<?php echo $row['patientID'];?>" class="form-control" readonly>
+                                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Patient Name. : </label>
+                                                <div class="col-5 ">
+                                                    <input id="docid" type="text" name="" value="<?php echo $row['patient_fname']. " " .$row['patient_lname'];?> " class="form-control" readonly>
+                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Doctor ID. : </label>
+                                                <div class="col-5 ">
+                                                    <input id="docid" type="text" name="docid" value="<?php echo $row['docID'];?> " class="form-control" readonly>
+                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Patient Remarks. : </label>
+                                                <div class="col-5 ">
+                                                    <textarea class="form-control" readonly><?php echo $row['remarks'];?></textarea>
+                                                </div>
+                                        </div>                                  
                                         <?php
                                                     }
                                                 }
                                             }
                                         }
                                     ?>
-										
+                                    <div class="form-group row">
+                                        <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Doctor Comment. : </label>
+                                            <div class="col-5 ">
+                                                <textarea name="comment" class="form-control" ></textarea>
+                                            </div>
+                                    </div>   
+                                        
                                         <div class="row pt-2 pt-sm-5 mt-1">
                                             <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
                                             </div>
                                             <div class="col-sm-6 pl-0">
                                                 <p class="text-right">
-                                                    <a href="viewdept.php" class="btn btn-space btn-danger" style="border-radius: 5px;">Cancel</a>
-                                                    <button id="editBtn" name = "edit" class="btn btn-space btn-primary" style="border-radius: 5px;">Edit</button>
+                                                    <button id="comment" name = "commentBtn" class="btn btn-space btn-primary" style="border-radius: 5px;">Done</button>
                                                 </p>
                                             </div>
                                         </div>
-                                       
                                     </form>
                                 </div>
                             </div>
