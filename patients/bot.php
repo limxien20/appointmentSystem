@@ -1,6 +1,6 @@
 <?php
 
-$conn = mysqli_connect("localhost", "root", "", "onlinebot");
+$conn = mysqli_connect("localhost", "root", "", "health_appointment");
 
     if($conn){
         $user_message = mysqli_real_escape_string($conn,$_POST['mesageValue']);

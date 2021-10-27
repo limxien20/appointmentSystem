@@ -99,7 +99,7 @@ include_once("session.php");
                             <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
                                     <h5 class="card-header">Patients List
-										<button class="btn btn-outline-light float-right" onclick="getCustomers()">Refresh</button>
+										
 									</h5>
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
@@ -157,19 +157,7 @@ include_once("session.php");
                                 </div>
                             </div>
                             <!-- ============================================================== -->
-                            <!-- ============================================================== -->
-                            <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h3 class="font-16">Filter</h3>
-										<input class="form-control" type="text" placeholder="Search..">
-                                    </div>
-                                    <div class="card-body border-top">
-                                        <a href="#" class="btn btn-secondary btn-lg btn-block">Submit</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ============================================================== -->
+                            
                             <!-- ============================================================== -->
                         </div>
                 </div>
