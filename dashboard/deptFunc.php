@@ -19,7 +19,7 @@ function addDept(){
         $result = mysqli_query($db, $dept_check_query);
         $dept = mysqli_fetch_assoc($result);
         
-        if ($dept) { // if user exists
+        if ($dept) { // if department exists
           if ($dept['departmentID'] === $deptid) {
             echo"<script>alert('Department ID Existed')</script>";
           }
@@ -28,7 +28,7 @@ function addDept(){
             echo"<script>alert('Department Name Existed')</script>";
           }
         }
-        // Finally, register user if there are no errors in the form
+        
         else {
             $query = "INSERT INTO department (departmentID,departmentName) 
                       VALUES('$deptid','$deptName')";

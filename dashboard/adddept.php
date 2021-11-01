@@ -113,13 +113,13 @@ include_once("session.php");
                                     <div class="form-group row">
                                             <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Department ID. : </label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="deptid" type="text" name="deptid" required placeholder="Department ID." class="form-control">
+                                                <input id="deptid" type="text" name="deptid" required placeholder="Department ID." class="form-control" required>
                                             </div>
                                         </div>
 										<div class="form-group row">
                                             <label for="inputPassword" class="col-3 col-lg-2 col-form-label text-right">Department Name: </label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="deptName" type="text" name="deptName" required placeholder="Department Name" class="form-control">
+                                                <input id="deptName" type="text" name="deptName" required placeholder="Department Name" class="form-control" required>
                                             </div>
                                         </div>
 										

@@ -6,6 +6,8 @@ include_once("session.php");
     $conn = new mysqli ('localhost', 'root','','health_appointment');
     $dept_query = "SELECT docDepartment, count(*) as number FROM doctors GROUP BY docDepartment";
     $result = mysqli_query($conn,$dept_query);
+    $gender_query = "SELECT patient_gender, count(*) as number FROM patients GROUP BY patient_gender";
+    $r = mysqli_query($conn,$gender_query);
 ?>
 
 <!doctype html>
@@ -33,28 +35,52 @@ include_once("session.php");
 	</style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                         <script type="text/javascript">
-                        google.charts.load('current', {'packages':['corechart']});
-                        google.charts.setOnLoadCallback(drawChart);
+                            google.charts.load('current', {'packages':['corechart']});
+                            google.charts.setOnLoadCallback(drawChart);
 
-                        function drawChart() {
+                            function drawChart() {
 
-                            var data = google.visualization.arrayToDataTable([
-                            ['Department', 'No. of Doctors'],
-                            <?php
-                                while($row =mysqli_fetch_array($result)){
-                                    echo "['".$row["docDepartment"]."',".$row["number"]."],";
-                                }
-                            ?>
-                            ]);
-                            var options = {
-                            title: 'No. of Doctors in Department',
-                            is3D: true
-                            };
-                            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                                var data = google.visualization.arrayToDataTable([
+                                ['Department', 'No. of Doctors'],
+                                <?php
+                                    while($row =mysqli_fetch_array($result)){
+                                        echo "['".$row["docDepartment"]."',".$row["number"]."],";
+                                    }
+                                ?>
+                                ]);
+                                var options = {
+                                title: 'No. of Doctors in Department',
+                                pieHole:0.4,
+                                };
+                                var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
 
-                            chart.draw(data, options);
-                        }
-    </script>
+                                chart.draw(data, options);
+                            }
+                        </script>
+
+                        <script type="text/javascript">
+                            google.charts.load('current', {'packages':['corechart']});
+                            google.charts.setOnLoadCallback(drawChart);
+
+                            function drawChart() {
+
+                                var data = google.visualization.arrayToDataTable([
+                                ['Gender', 'No. of Gender'],
+                                <?php
+                                    while($row =mysqli_fetch_array($r)){
+                                        echo "['".$row["patient_gender"]."',".$row["number"]."],";
+                                    }
+                                ?>
+                                ]);
+                                var options = {
+                                title: 'No. of Gender for Registered Patient',
+                                is3D: true,
+                                };
+                                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+
+                                chart.draw(data, options);
+                            }
+                        </script>
 </head>
 
 <body>
@@ -121,6 +147,9 @@ include_once("session.php");
                             </div>
                         </div>
                     </div>
+                    <!-- ============================================================== -->    
+                    <div id="donutchart" style="width: 100%; height: 500px;"></div><br>
+                    <!-- ============================================================== -->
                     <!-- ============================================================== -->    
                     <div id="piechart_3d" style="width: 100%; height: 500px;"></div><br>
                     <!-- ============================================================== -->
