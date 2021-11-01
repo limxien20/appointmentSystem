@@ -3,8 +3,9 @@ include_once("session.php");
 ?>
 
 <?php
+    $curDoc = $_SESSION['doctor'];
     $conn = new mysqli ('localhost', 'root','','health_appointment');
-    $dept_query = "SELECT docDepartment, count(*) as number FROM doctors GROUP BY docDepartment";
+    $dept_query = "SELECT sched_status, count(*) as number FROM doc_sched WHERE doc_id ='$curDoc' GROUP BY sched_status ";
     $result = mysqli_query($conn,$dept_query);
 ?>
 
@@ -30,7 +31,7 @@ include_once("session.php");
 	<style>
 		<?php include('includes/style.php');?>
 	</style>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                         <script type="text/javascript">
                         google.charts.load('current', {'packages':['corechart']});
                         google.charts.setOnLoadCallback(drawChart);
@@ -38,22 +39,22 @@ include_once("session.php");
                         function drawChart() {
 
                             var data = google.visualization.arrayToDataTable([
-                            ['Department', 'No. of Doctors'],
+                            ['Status of the doctor', 'No. '],
                             <?php
                                 while($row =mysqli_fetch_array($result)){
-                                    echo "['".$row["docDepartment"]."',".$row["number"]."],";
+                                    echo "['".$row["sched_status"]."',".$row["number"]."],";
                                 }
                             ?>
                             ]);
                             var options = {
-                            title: 'No. of Doctors in Department',
+                            title: 'No. of Doctors status',
                             is3D: true
                             };
                             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
 
                             chart.draw(data, options);
                         }
-                        </script>
+                </script>
 </head>
 
 <body>
@@ -191,6 +192,7 @@ include_once("session.php");
                                         <h5 class="text-muted">Today's Appointment </h5>
                                         <div class="metric-value d-inline-block">
                                         <?php
+                                            $doc = $_SESSION['doctor'];
                                             $conn = new mysqli ('localhost', 'root','','health_appointment');
                                             $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'booked' AND DATE(sched_datetime) = CURDATE() AND doc_id = '$doc'");
                                             $row = mysqli_num_rows($result);

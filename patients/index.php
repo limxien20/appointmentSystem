@@ -110,7 +110,7 @@
                 $("#send").css("display","block");
             }
             else{
-                $("#send").css("display","none");v 
+                $("#send").css("display","none");
             }
         });
     });

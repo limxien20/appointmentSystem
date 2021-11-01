@@ -254,7 +254,8 @@ include_once("session.php");
                                                 $session = $_SESSION['doctor'];
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session' AND doc_sched.sched_status ='Done'";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID 
+                                                            WHERE doc_sched.doc_id = '$session' AND doc_sched.sched_status ='Done'";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>

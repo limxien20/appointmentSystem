@@ -89,7 +89,6 @@ include_once("psession.php");
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto " href="main.php">Doctor Schedule</a></li>
-          <li><a class="nav-link scrollto " href="appointment.php">Appointment</a></li>
           <li><a class="nav-link scrollto " href="history.php">History</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
