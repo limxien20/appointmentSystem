@@ -170,7 +170,7 @@ include_once("session.php");
                                     <div class="form-group row">
                                         <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Doctor Comment. : </label>
                                             <div class="col-5 ">
-                                                <textarea name="comment" class="form-control" ></textarea>
+                                                <textarea name="comment" class="form-control" required></textarea>
                                             </div>
                                     </div>   
                                         

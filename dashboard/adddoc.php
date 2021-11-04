@@ -131,13 +131,13 @@ include_once("session.php");
 										<div class="form-group row">
                                             <label for="inputfName" class="col-3 col-lg-2 col-form-label text-right">First Name: </label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="fname" type="text" name="fname" required placeholder="First Name" class="form-control">
+                                                <input id="fname" type="text" name="fname" required placeholder="First Name" class="form-control" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputlName" class="col-3 col-lg-2 col-form-label text-right">Last Name: </label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="lname" type="text" name="lname" required placeholder="Last Name" class="form-control">
+                                                <input id="lname" type="text" name="lname" required placeholder="Last Name" class="form-control" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -164,7 +164,7 @@ include_once("session.php");
                                         <div class="form-group row">
                                             <label for="inputPhone" class="col-3 col-lg-2 col-form-label text-right">Phone No.</label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="phone" type="phone" name="phone" required placeholder="Phone" class="form-control" maxlength="10" size="10">
+                                                <input id="phone" type="number" name="phone" required placeholder="Phone" class="form-control" maxlength="10" size="10">
                                             </div>
                                         </div>
                                         <div class="form-group row">

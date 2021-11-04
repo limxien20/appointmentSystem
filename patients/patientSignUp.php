@@ -98,13 +98,13 @@
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" required>
+                  <input type="text" class="form-control" name="fname" id="fname" placeholder="First Name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" required>
+                  <input type="text" class="form-control" name="lname" id="lname" placeholder="Last Name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
                 </div>
             </div>
             <br>
@@ -116,7 +116,7 @@
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone No." required>
+                <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone No." maxlength="10" size="10" required>
                 </div>
             </div>
             <br>

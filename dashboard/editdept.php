@@ -133,7 +133,7 @@ include_once("session.php");
 										<div class="form-group row">
                                             <label for="inputPassword" class="col-3 col-lg-2 col-form-label text-right">Department Name: </label>
                                             <div class="col-9 col-lg-10">
-                                                <input id="edit_deptName" type="text" name="edit_deptName" value="<?php echo $row['departmentName']?>" class="form-control" required>
+                                                <input id="edit_deptName" type="text" name="edit_deptName" value="<?php echo $row['departmentName']?>" class="form-control" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode==32)" required>
                                             </div>
                                         </div>
 
