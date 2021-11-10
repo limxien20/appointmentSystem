@@ -122,7 +122,7 @@
             <br>
             <div class="row">
                 <div class="col-md-4 offset-md-4 form-group">
-                  <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B" required>
+                  <input type="date" class="form-control" name="dob" id="dob" placeholder="D.O.B" max= "<?= date('Y-m-d', strtotime('-17 year')); ?>" required>
                 </div>
             </div>
             <br>

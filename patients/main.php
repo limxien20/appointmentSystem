@@ -131,7 +131,7 @@ include_once("psession.php");
                                                 
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE DATE(doc_sched.sched_datetime) >= CURDATE() AND doc_sched.sched_status ='Available'";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE DATE(doc_sched.sched_datetime) >= CURDATE() AND doc_sched.sched_status ='Available' ORDER BY doc_sched.sched_id";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>

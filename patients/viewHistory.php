@@ -131,12 +131,9 @@ include_once("psession.php");
                                             $db = mysqli_connect('localhost', 'root','','health_appointment');
                                             $id = $_POST['appointID'];
 
-                                            //$query = "SELECT doc_sched.sched_id, doccomment.comment, appointment.patientID, appointment.appointment_id, appointment.remarks FROM doc_sched 
-                                            //INNER JOIN doccomment ON doc_sched.sched_id = doccomment.schedID 
-                                            //INNER JOIN appointment ON doc_sched.sched_id = appointment.schedID WHERE doc_sched.sched_id ='$id'";
                                             $query = "SELECT appointment.appointment_id, appointment.docID, doctors.docFname, doctors.docLname , appointment.remarks, doccomment.comment FROM appointment 
                                                         INNER JOIN doctors ON appointment.docID = doctors.docID 
-                                                        INNER JOIN doccomment ON appointment.docID = doccomment.docID WHERE appointment.appointment_id = '$id'";
+                                                        INNER JOIN doccomment ON appointment.appointment_id = doccomment.appointmentID WHERE appointment.appointment_id = '$id'";
                                             $result = mysqli_query($db, $query);
 
                                             if($result){

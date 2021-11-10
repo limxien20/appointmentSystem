@@ -107,7 +107,7 @@ include_once("session.php");
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 //$query = "SELECT * FROM appointment WHERE docID = '$session'";
                                                 $query = "SELECT * FROM appointment INNER JOIN doc_sched ON appointment.schedID = doc_sched.sched_id 
-                                                WHERE doc_sched.sched_status='Booked' AND appointment.docID = '$session' ";
+                                                WHERE doc_sched.sched_status='Booked' AND appointment.docID = '$session' AND DATE(doc_sched.sched_datetime) >= CURDATE() ";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -119,6 +119,7 @@ include_once("session.php");
                                                         <th class="border-0">Schedule ID</th>
                                                         <th class="border-0">Doctor ID</th>
                                                         <th class="border-0">Doctor Stat</th>
+                                                        <th class="border-0">Date</th>
                                                         <th class="border-0">Remarks</th>
                                                         <th class="border-0"></th>
                                                     </tr>
@@ -134,6 +135,7 @@ include_once("session.php");
                                                                     <td><?php echo $row['schedID']; ?></td>
                                                                     <td><?php echo $row['docID']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
+                                                                    <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['remarks']; ?></td>
                                                                     <td>
                                                                         <form action="remark.php" method="POST">

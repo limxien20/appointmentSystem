@@ -184,7 +184,7 @@ include_once("session.php");
                                                 $session = $_SESSION['doctor'];
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
-                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session' AND doc_sched.sched_status ='Booked'";
+                                                            FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE doc_sched.doc_id = '$session' AND doc_sched.sched_status ='Booked' AND DATE(doc_sched.sched_datetime) >= CURDATE()";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -212,12 +212,6 @@ include_once("session.php");
                                                                     <td><?php echo $row['doc_dept']; ?></td>
                                                                     <td><?php echo $row['sched_datetime']; ?></td>
                                                                     <td><?php echo $row['sched_status']; ?></td>
-                                                                    <td>
-                                                                        <form action="" method="POST">
-                                                                            <input type="hidden" name="move_id" value="<?php echo $row['sched_id']; ?>">
-                                                                            <button type="submit" name="move"class="btn btn-danger">Delete</button>
-                                                                        </form>
-                                                                    </td>
                                                                 </tr>    
                                                     <?php
 

@@ -129,8 +129,8 @@
             data: {mesageValue: $userMessage},
             success: function(data){
                 //show respond
-                $appendBotResponse = '<div class = "messageContainer"><div class="chat botMessage">'+data+'</div></div>';
-                $("#messageDisplay").append($appendBotResponse);
+                $showBotResponse = '<div class = "messageContainer"><div class="chat botMessage">'+data+'</div></div>';
+                $("#messageDisplay").append($showBotResponse);
             }
         });
         $("#message").val("");
@@ -153,8 +153,8 @@
                 data: {mesageValue: $userMessage},
                 success: function(data){
                     //show respond
-                    $appendBotResponse = '<div class = "messageContainer"><div class="chat botMessage">'+data+'</div></div>';
-                    $("#messageDisplay").append($appendBotResponse);
+                    $showBotResponse = '<div class = "messageContainer"><div class="chat botMessage">'+data+'</div></div>';
+                    $("#messageDisplay").append($showBotResponse);
                 }
             });
             $("#message").val("");

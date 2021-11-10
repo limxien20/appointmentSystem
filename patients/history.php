@@ -124,17 +124,18 @@ include_once("psession.php");
                             <!-- ============================================================== -->
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
-                                    <h5 class="card-header">History List</h5> 
+                                    <h5 class="card-header">Ongoing List</h5> 
                                     <div class="card-body p-0">
                                         <div class="table-responsive">
                                             <?php
                                                 
                                                 $p = $_SESSION['patient'];
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
-                                                $query = "SELECT appointment.appointment_id, appointment.schedID, appointment.docID, doctors.docFname FROM appointment 
-                                                INNER JOIN doctors ON appointment.docID = doctors.docID INNER JOIN doc_sched ON appointment.docID = doc_sched.doc_id
-                                                WHERE appointment.patientID = '$p' AND doc_sched.sched_status ='Done'";
-                                                //$query = "SELECT * FROM appointment WHERE patientID = '$p'";
+                                              
+                                                $query = "SELECT appointment.appointment_id, appointment.schedID, appointment.docID, doc_sched.sched_status FROM doc_sched
+                                                          INNER JOIN appointment ON doc_sched.sched_id = appointment.schedID WHERE doc_sched.sched_status ='Booked' AND appointment.patientID = '$p' AND DATE(doc_sched.sched_datetime) >= CURDATE()";
+                                                          
+                                              
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>
@@ -144,7 +145,7 @@ include_once("psession.php");
                                                         <th class="border-0">Appointment ID</th>
                                                         <th class="border-0">Schedule</th>
                                                         <th class="border-0">Doctor ID</th>
-                                                        <th class="border-0">Doctor Name</th>
+                                                        <th class="border-0">Doctor Stat</th>
                                                         
                                                         <th class="border-0"></th>
                                                     </tr>
@@ -158,15 +159,80 @@ include_once("psession.php");
                                                                     <td><?php echo $row['appointment_id']; ?></td>
                                                                     <td><?php echo $row['schedID']; ?></td>
                                                                     <td><?php echo $row['docID']; ?></td>
-                                                                    <td>Dr. <?php echo $row['docFname']; ?></td>
+                                                                    <td><?php echo $row['sched_status']; ?></td>
                                                                     
-                                                                    
+                                                                </tr>    
+                                                    <?php
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                                                            
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- ============================================================== -->
+                        
+                            <!-- ============================================================== -->
+                        </div>
+
+                        <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">History List</h5> 
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <?php
+                                                
+                                                $p = $_SESSION['patient'];
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+
+                                                $query = "SELECT appointment.appointment_id, appointment.schedID, appointment.docID, doc_sched.sched_status FROM doc_sched
+                                                          INNER JOIN appointment ON doc_sched.sched_id = appointment.schedID WHERE doc_sched.sched_status ='Done' AND appointment.patientID = '$p'";
+
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
+                                            <table class="table" id="docinfo">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Appointment ID</th>
+                                                        <th class="border-0">Schedule</th>
+                                                        <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Doctor Stat</th>
+                                                        
+                                                        <th class="border-0"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="doclist">
+                                                    <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result)){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['appointment_id']; ?></td>
+                                                                    <td><?php echo $row['schedID']; ?></td>
+                                                                    <td><?php echo $row['docID']; ?></td>
+                                                                    <td><?php echo $row['sched_status']; ?></td>
+
                                                                     <td>
                                                                         <form action="viewHistory.php" method="POST">
                                                                             <input type="hidden" name="appointID" value="<?php echo $row['appointment_id']; ?>">
                                                                             <button type="submit" name="viewHisBtn"class="btn btn-primary">View</button>
                                                                         </form>
                                                                     </td>
+                                                                  
                                                                 </tr>    
                                                     <?php
 

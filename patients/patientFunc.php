@@ -27,7 +27,7 @@ if (isset($_POST['register'])) {
 
     // first check the database to make sure 
     // a user does not already exist with the same icno and/or email
-    $user_check_query = "SELECT * FROM patients WHERE icno='$icno' OR patient_email='$email' LIMIT 1";
+    $user_check_query = "SELECT * FROM patients WHERE icno='$icno' OR patient_email='$email' OR patient_phone='$phone' LIMIT 1";
     $result = mysqli_query($db, $user_check_query);
     $user = mysqli_fetch_assoc($result);
     
@@ -38,6 +38,10 @@ if (isset($_POST['register'])) {
   
       if ($user['patient_email'] === $email) {
         echo"<script>alert('Email Existed')</script>";
+      }
+
+      if ($user['patient_phone'] === $phone) {
+        echo"<script>alert('Phone Existed')</script>";
       }
     }
     // Finally, register user if there are no errors in the form

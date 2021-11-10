@@ -105,7 +105,67 @@ include_once("session.php");
                                         <div class="table-responsive">
                                             <?php
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
-                                                $query = "SELECT * FROM appointment INNER JOIN doc_sched ON appointment.schedID = doc_sched.sched_id ";
+                                                $query = "SELECT * FROM appointment INNER JOIN doc_sched ON appointment.schedID = doc_sched.sched_id  WHERE DATE(doc_sched.sched_datetime) >= CURDATE() ORDER BY doc_sched.sched_id ";
+                                                $result = mysqli_query($conn,$query);
+
+                                            ?>
+                                            <table class="table" id="docinfo">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Appointment ID</th>
+                                                        <th class="border-0">Patient ID</th>
+                                                        <th class="border-0">Schedule ID</th>
+                                                        <th class="border-0">Doctor ID</th>
+                                                        <th class="border-0">Appointment Status</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="doclist">
+                                                    <?php                                                  
+                                                        if(mysqli_num_rows($result) > 0 ){
+                                                            while($row = mysqli_fetch_array($result) ){
+                                                    ?>
+                                                                <tr>
+                                                                    <td><?php echo $row['appointment_id']; ?></td>
+                                                                    <td><?php echo $row['patientID']; ?></td>
+                                                                    <td><?php echo $row['schedID']; ?></td>
+                                                                    <td><?php echo $row['docID']; ?></td>
+                                                                    <td><?php echo $row['sched_status']; ?></td>
+                                                                </tr>    
+                                                    <?php
+
+
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo "<td> No record found </td>";
+                                                        }
+                                                    
+                                                    ?>
+                                                                                            
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                          
+                            <!-- ============================================================== -->               
+                            <!-- ============================================================== -->
+                        </div>
+					</div>
+
+                    <div class="row">
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header">(Passed) Appointment List</h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <?php
+                                                $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                $query = "SELECT * FROM appointment INNER JOIN doc_sched ON appointment.schedID = doc_sched.sched_id WHERE DATE(doc_sched.sched_datetime) <= CURDATE() ORDER BY doc_sched.sched_id ";
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>

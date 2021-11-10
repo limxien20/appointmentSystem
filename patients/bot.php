@@ -11,7 +11,6 @@ $conn = mysqli_connect("localhost", "root", "", "health_appointment");
         if(mysqli_num_rows($runQuery) > 0){
              //fetch result
              $result = mysqli_fetch_assoc($runQuery);
-             //echo
              echo $result['response'];
         }
         else{
