@@ -105,7 +105,6 @@ if (isset($_POST['appointment'])) {
   mysqli_query($db, $query);
   mysqli_query($db, $booked);
   echo"<script>alert('Done Appointment')</script>";
-      
 }
 }
 ?>

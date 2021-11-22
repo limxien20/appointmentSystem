@@ -183,7 +183,7 @@
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>EchoHealth</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Medilab</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
           Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
