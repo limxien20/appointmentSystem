@@ -128,28 +128,28 @@ include_once("session.php");
                                         <div class="form-group row">
                                             <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Schedule ID. : </label>
                                                 <div class="col-5 ">
-                                                    <input id="docid" type="text" name="appointmentid" value="<?php echo $row['sched_id'];?>" class="form-control" readonly>
+                                                    <input id="docid" type="text" name="appointmentid" value="<?php echo $row['sched_id'];?>" class="form-control" style="border: none; background-color: transparent; " readonly>
                                                 </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Appointment ID. : </label>
                                                 <div class="col-5 ">
-                                                    <input id="docid" type="text" name="schedid" value="<?php echo $row['appointment_id'];?>" class="form-control" readonly>
+                                                    <input id="docid" type="text" name="schedid" value="<?php echo $row['appointment_id'];?>" class="form-control" style="border: none; background-color: transparent; " readonly>
                                                 </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Patient ID. : </label>
                                                 <div class="col-5 ">
-                                                    <input id="docid" type="text" name="schedid" value="<?php echo $row['patientID'];?>" class="form-control" readonly>
+                                                    <input id="docid" type="text" name="schedid" value="<?php echo $row['patientID'];?>" class="form-control" style="border: none; background-color: transparent; " readonly>
                                                 </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Patient Remarks. : </label>
                                                 <div class="col-5 ">
-                                                    <textarea class="form-control" readonly> <?php echo $row['remarks'];?></textarea>
+                                                    <textarea class="form-control" style="border: none; background-color: transparent; " readonly> <?php echo $row['remarks'];?></textarea>
                                                 </div>
                                         </div>
 
@@ -157,7 +157,7 @@ include_once("session.php");
                                         <div class="form-group row">
                                             <label for="inputDocId" class="col-3 col-lg-2 col-form-label text-right">Doc Comment. : </label>
                                                 <div class="col-5 ">
-                                                    <textarea class="form-control" readonly> <?php echo $row['comment'];?></textarea>
+                                                    <textarea class="form-control" style="border: none; background-color: transparent; " readonly> <?php echo $row['comment'];?></textarea>
                                                 </div>
                                         </div>
 
