@@ -186,7 +186,7 @@ include_once("session.php");
                                             <?php
                                                 
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
-                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'Booked'");
+                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'Booked' AND DATE(sched_datetime) >= CURDATE()");
                                                 $row = mysqli_num_rows($result);
                                                 echo '<h1 class="mb-1">' .$row. '</h1>';
                                             
@@ -206,7 +206,7 @@ include_once("session.php");
                                             <?php
                                                 
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
-                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'available'");
+                                                $result = $conn->query("SELECT sched_id FROM doc_sched WHERE sched_status = 'available' AND DATE(sched_datetime) >= CURDATE()");
                                                 $row = mysqli_num_rows($result);
                                                 echo '<h1 class="mb-1">' .$row. '</h1>';
                                             
