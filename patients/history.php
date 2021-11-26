@@ -131,11 +131,10 @@ include_once("psession.php");
                                                 
                                                 $p = $_SESSION['patient'];
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
-                                              
+
                                                 $query = "SELECT appointment.appointment_id, appointment.schedID, appointment.docID, doc_sched.sched_status FROM doc_sched
                                                           INNER JOIN appointment ON doc_sched.sched_id = appointment.schedID WHERE doc_sched.sched_status ='Booked' AND appointment.patientID = '$p' AND DATE(doc_sched.sched_datetime) >= CURDATE()";
-                                                          
-                                              
+                                                
                                                 $result = mysqli_query($conn,$query);
 
                                             ?>

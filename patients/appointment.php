@@ -110,7 +110,7 @@ include_once("psession.php");
               $db = mysqli_connect('localhost', 'root','','health_appointment');
               $id = $_POST['schedid'];
 
-              //$query ="SELECT * FROM doc_sched WHERE sched_id = '$id'";
+              // joining doc_sched and doctors table
               $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
                         FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE sched_id = '$id' ";
               $result = mysqli_query($db, $query);

@@ -284,12 +284,6 @@ include_once("session.php");
                                                                             <button type="submit" name="view"class="btn btn-primary">View</button>
                                                                         </form>
                                                                     </td>
-                                                                    <td>
-                                                                        <form action="" method="POST">
-                                                                            <input type="hidden" name="move_id" value="<?php echo $row['sched_id']; ?>">
-                                                                            <button type="submit" name="move"class="btn btn-danger">Delete</button>
-                                                                        </form>
-                                                                    </td>
                                                                 </tr>    
                                                     <?php
 

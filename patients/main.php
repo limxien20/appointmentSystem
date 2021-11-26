@@ -8,8 +8,6 @@ include_once("psession.php");
     $query = "SELECT patient_fname FROM patients WHERE icno ='$currentUser' ";
     $result = mysqli_query($conn,$query);
     
-
-    
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +99,7 @@ include_once("psession.php");
         <div class="section-title">
           <br>
           <h2>Doctor Schedule</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>View doctor schedule here. Make an appointment now</p>
         </div>
         <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -130,6 +128,7 @@ include_once("psession.php");
                                             <?php
                                                 
                                                 $conn = new mysqli ('localhost', 'root','','health_appointment');
+                                                // joining doc_sched and doctors table
                                                 $query = "SELECT doc_sched.sched_id, doc_sched.doc_id, doctors.docFname, doc_sched.doc_dept, doc_sched.sched_datetime, doc_sched.sched_status 
                                                             FROM doc_sched INNER JOIN doctors ON doc_sched.doc_id = doctors.docID WHERE DATE(doc_sched.sched_datetime) >= CURDATE() AND doc_sched.sched_status ='Available' ORDER BY doc_sched.sched_datetime";
                                                 $result = mysqli_query($conn,$query);

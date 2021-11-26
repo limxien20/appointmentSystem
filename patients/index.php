@@ -170,7 +170,7 @@
     <div class="container">
       <h1>Welcome to EchoHealth</h1>
       <h2>Your health companion</h2>
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+      <a href="#why-us" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section>
   <!-- End Hero -->
